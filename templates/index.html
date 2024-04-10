@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recipes</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="text-center"><br>
+        <h1>World of Recipes</h1>
+            <img src="static/imges/recipes.jpg" alt="Recipe Image" class="img-fluid mb-4">
+            {% if current_user.is_authenticated %}
+                <h2>Welcome, {{ current_user.username }}</h2>
+                <form action="{{ url_for('logout') }}" method="POST">
+                    <button type="submit" class="btn btn-danger">Logout</button>
+                </form>
+            {% endif %}
+
+            <nav aria-label="Page navigation">
+                <ul class="pagination justify-content-center">
+                    {% if recipes.has_prev %}
+                        <li class="page-item">
+                            <a class="page-link" href="{{ url_for('index', page=recipes.prev_num)}}">Previous</a>
+                        </li>
+                    {% endif %}
+
+                    {% if recipes.has_next %}
+                        <li class="page-item">
+                            <a class="page-link" href="{{ url_for('index', page=recipes.next_num) }}">Next</a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </nav>
+
+            <a href="{{ url_for('register') }}" class="btn btn-primary">Click here...</a>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS (optional) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
